@@ -27,10 +27,11 @@ df_data = pd.read_csv('train.csv', sep=',', usecols = [0, 2, 3, 4, 5, 6, 7, 8 ,9
 df_test = pd.read_csv('test.csv', sep=',', header = 0)
 
 #Loads labels (Survived data)
-_, labels = tfl.data_utils.load_csv('tr.csv', target_column=1, columns_to_ignore = range(1), has_header = True, 
+_, labelsT = tfl.data_utils.load_csv('train.csv', target_column=1, columns_to_ignore = range(1), has_header = True, 
                         categorical_labels=True, n_classes=2 )
-_, labelsCV = tfl.data_utils.load_csv('cv.csv', target_column=1, columns_to_ignore = range(1), has_header = True, 
-                        categorical_labels=True, n_classes=2 )
+labels = labelsT[0:591][:]
+labelsCV = labelsT[591:][:]
+
 
 #Fills any remaining unknown ages and replaces ages with bins of age ranges
 def simplify_ages(df):
